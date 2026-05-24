@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using BudgetControl.Api.Models;
+using BudgetControl.Api.Models.Commercial;
 
 namespace BudgetControl.Api.Data
 {
@@ -10,6 +11,15 @@ namespace BudgetControl.Api.Data
         public DbSet<User> Users { get; set; } = null!;
         public DbSet<Role> Roles { get; set; } = null!;
         public DbSet<UserRole> UserRoles { get; set; } = null!;
+
+        public DbSet<ClienteReferencia> ClientesReferencia { get; set; } = null!;
+        public DbSet<ObraReferencia> ObrasReferencia { get; set; } = null!;
+        public DbSet<AcuerdoComercial> AcuerdosComerciales { get; set; } = null!;
+        public DbSet<PlanPago> PlanesPago { get; set; } = null!;
+        public DbSet<CuotaComercial> CuotasComerciales { get; set; } = null!;
+        public DbSet<PagoComercial> PagosComerciales { get; set; } = null!;
+        public DbSet<AplicacionPagoComercial> AplicacionesPagoComerciales { get; set; } = null!;
+        public DbSet<VinculacionFacturaComercial> VinculacionesFacturaComerciales { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -44,6 +54,136 @@ namespace BudgetControl.Api.Data
                 entity.HasOne(ur => ur.Role)
                     .WithMany(r => r.UserRoles)
                     .HasForeignKey(ur => ur.RoleId);
+            });
+
+            modelBuilder.Entity<ClienteReferencia>(entity =>
+            {
+                entity.ToTable("clientes_referencia");
+                entity.Property(e => e.Id).HasColumnName("id");
+                entity.Property(e => e.ClienteExternoId).HasColumnName("cliente_externo_id");
+                entity.Property(e => e.Nombre).HasColumnName("nombre");
+                entity.Property(e => e.Documento).HasColumnName("documento");
+                entity.Property(e => e.Activo).HasColumnName("activo");
+            });
+
+            modelBuilder.Entity<ObraReferencia>(entity =>
+            {
+                entity.ToTable("obras_referencia");
+                entity.Property(e => e.Id).HasColumnName("id");
+                entity.Property(e => e.ObraExternaId).HasColumnName("obra_externa_id");
+                entity.Property(e => e.ClienteExternoId).HasColumnName("cliente_externo_id");
+                entity.Property(e => e.NombreObra).HasColumnName("nombre_obra");
+                entity.Property(e => e.Descripcion).HasColumnName("descripcion");
+                entity.Property(e => e.Activa).HasColumnName("activa");
+            });
+
+            modelBuilder.Entity<AcuerdoComercial>(entity =>
+            {
+                entity.ToTable("acuerdos_comerciales");
+                entity.Property(e => e.Id).HasColumnName("id");
+                entity.Property(e => e.ClienteExternoId).HasColumnName("cliente_externo_id");
+                entity.Property(e => e.ObraExternaId).HasColumnName("obra_externa_id");
+                entity.Property(e => e.NumeroAcuerdo).HasColumnName("numero_acuerdo");
+                entity.Property(e => e.FechaAcuerdo).HasColumnName("fecha_acuerdo");
+                entity.Property(e => e.Descripcion).HasColumnName("descripcion");
+                entity.Property(e => e.MontoTotal).HasColumnName("monto_total");
+                entity.Property(e => e.Estado).HasColumnName("estado");
+                entity.Property(e => e.ViaOperacion).HasColumnName("via_operacion");
+                entity.Property(e => e.Observaciones).HasColumnName("observaciones");
+                entity.Property(e => e.FechaAlta).HasColumnName("fecha_alta");
+                entity.Property(e => e.UsuarioAlta).HasColumnName("usuario_alta");
+            });
+
+            modelBuilder.Entity<PlanPago>(entity =>
+            {
+                entity.ToTable("planes_pago");
+                entity.Property(e => e.Id).HasColumnName("id");
+                entity.Property(e => e.AcuerdoComercialId).HasColumnName("acuerdo_comercial_id");
+                entity.Property(e => e.TieneAnticipo).HasColumnName("tiene_anticipo");
+                entity.Property(e => e.MontoAnticipo).HasColumnName("monto_anticipo");
+                entity.Property(e => e.CantidadCuotas).HasColumnName("cantidad_cuotas");
+                entity.Property(e => e.FechaPrimerVencimiento).HasColumnName("fecha_primer_vencimiento");
+                entity.Property(e => e.Periodicidad).HasColumnName("periodicidad");
+                entity.Property(e => e.Observaciones).HasColumnName("observaciones");
+
+                entity.HasOne(e => e.AcuerdoComercial)
+                    .WithOne(a => a.PlanPago)
+                    .HasForeignKey<PlanPago>(e => e.AcuerdoComercialId)
+                    .OnDelete(DeleteBehavior.Cascade);
+            });
+
+            modelBuilder.Entity<CuotaComercial>(entity =>
+            {
+                entity.ToTable("cuotas_comerciales");
+                entity.Property(e => e.Id).HasColumnName("id");
+                entity.Property(e => e.PlanPagoId).HasColumnName("plan_pago_id");
+                entity.Property(e => e.NumeroCuota).HasColumnName("numero_cuota");
+                entity.Property(e => e.TipoCuota).HasColumnName("tipo_cuota");
+                entity.Property(e => e.FechaVencimiento).HasColumnName("fecha_vencimiento");
+                entity.Property(e => e.ImporteOriginal).HasColumnName("importe_original");
+                entity.Property(e => e.ImportePagado).HasColumnName("importe_pagado");
+                entity.Property(e => e.SaldoPendiente).HasColumnName("saldo_pendiente");
+                entity.Property(e => e.Estado).HasColumnName("estado");
+
+                entity.HasOne(e => e.PlanPago)
+                    .WithMany(p => p.Cuotas)
+                    .HasForeignKey(e => e.PlanPagoId)
+                    .OnDelete(DeleteBehavior.Cascade);
+            });
+
+            modelBuilder.Entity<PagoComercial>(entity =>
+            {
+                entity.ToTable("pagos_comerciales");
+                entity.Property(e => e.Id).HasColumnName("id");
+                entity.Property(e => e.ClienteExternoId).HasColumnName("cliente_externo_id");
+                entity.Property(e => e.ObraExternaId).HasColumnName("obra_externa_id");
+                entity.Property(e => e.AcuerdoComercialId).HasColumnName("acuerdo_comercial_id");
+                entity.Property(e => e.FechaPago).HasColumnName("fecha_pago");
+                entity.Property(e => e.ImporteTotal).HasColumnName("importe_total");
+                entity.Property(e => e.MedioPago).HasColumnName("medio_pago");
+                entity.Property(e => e.Observaciones).HasColumnName("observaciones");
+                entity.Property(e => e.Estado).HasColumnName("estado");
+
+                entity.HasOne(e => e.AcuerdoComercial)
+                    .WithMany(a => a.Pagos)
+                    .HasForeignKey(e => e.AcuerdoComercialId)
+                    .OnDelete(DeleteBehavior.Cascade);
+            });
+
+            modelBuilder.Entity<AplicacionPagoComercial>(entity =>
+            {
+                entity.ToTable("aplicaciones_pago_comerciales");
+                entity.Property(e => e.Id).HasColumnName("id");
+                entity.Property(e => e.PagoComercialId).HasColumnName("pago_comercial_id");
+                entity.Property(e => e.CuotaComercialId).HasColumnName("cuota_comercial_id");
+                entity.Property(e => e.ImporteAplicado).HasColumnName("importe_aplicado");
+                entity.Property(e => e.FechaAplicacion).HasColumnName("fecha_aplicacion");
+
+                entity.HasOne(e => e.PagoComercial)
+                    .WithMany(p => p.Aplicaciones)
+                    .HasForeignKey(e => e.PagoComercialId)
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(e => e.CuotaComercial)
+                    .WithMany(c => c.Aplicaciones)
+                    .HasForeignKey(e => e.CuotaComercialId)
+                    .OnDelete(DeleteBehavior.Cascade);
+            });
+
+            modelBuilder.Entity<VinculacionFacturaComercial>(entity =>
+            {
+                entity.ToTable("vinculaciones_factura_comerciales");
+                entity.Property(e => e.Id).HasColumnName("id");
+                entity.Property(e => e.CuotaComercialId).HasColumnName("cuota_comercial_id");
+                entity.Property(e => e.FacturaExternaId).HasColumnName("factura_externa_id");
+                entity.Property(e => e.NumeroFactura).HasColumnName("numero_factura");
+                entity.Property(e => e.ImporteVinculado).HasColumnName("importe_vinculado");
+                entity.Property(e => e.FechaVinculacion).HasColumnName("fecha_vinculacion");
+
+                entity.HasOne(e => e.CuotaComercial)
+                    .WithMany(c => c.VinculacionesFactura)
+                    .HasForeignKey(e => e.CuotaComercialId)
+                    .OnDelete(DeleteBehavior.Cascade);
             });
         }
     }

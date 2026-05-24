@@ -5,6 +5,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Infrastructure;
 using System.Text;
 using BudgetControl.Api.Data;
 using BudgetControl.Api.Services;
+using BudgetControl.Api.Services.Commercial;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -59,6 +60,8 @@ builder.Services.AddAuthentication(options =>
     });
 
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IComercialService, ComercialService>();
+builder.Services.AddScoped<IPagoComercialService, PagoComercialService>();
 
 var app = builder.Build();
 
