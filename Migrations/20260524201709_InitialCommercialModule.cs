@@ -68,34 +68,34 @@ namespace BudgetControl.Api.Migrations
                     table.PrimaryKey("PK_obras_referencia", x => x.id);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "roles",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    name = table.Column<string>(type: "text", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_roles", x => x.id);
-                });
+            // migrationBuilder.CreateTable(
+            //     name: "roles",
+            //     columns: table => new
+            //     {
+            //         id = table.Column<int>(type: "integer", nullable: false)
+            //             .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+            //         name = table.Column<string>(type: "text", nullable: false)
+            //     },
+            //     constraints: table =>
+            //     {
+            //         table.PrimaryKey("PK_roles", x => x.id);
+            //     });
 
-            migrationBuilder.CreateTable(
-                name: "users",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    username = table.Column<string>(type: "text", nullable: false),
-                    passwordhash = table.Column<string>(name: "password_hash", type: "text", nullable: false),
-                    fullname = table.Column<string>(name: "full_name", type: "text", nullable: true),
-                    email = table.Column<string>(type: "text", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_users", x => x.id);
-                });
+            // migrationBuilder.CreateTable(
+            //     name: "users",
+            //     columns: table => new
+            //     {
+            //         id = table.Column<int>(type: "integer", nullable: false)
+            //             .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+            //         username = table.Column<string>(type: "text", nullable: false),
+            //         passwordhash = table.Column<string>(name: "password_hash", type: "text", nullable: false),
+            //         fullname = table.Column<string>(name: "full_name", type: "text", nullable: true),
+            //         email = table.Column<string>(type: "text", nullable: true)
+            //     },
+            //     constraints: table =>
+            //     {
+            //         table.PrimaryKey("PK_users", x => x.id);
+            //     });
 
             migrationBuilder.CreateTable(
                 name: "pagos_comerciales",
@@ -148,29 +148,29 @@ namespace BudgetControl.Api.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "user_roles",
-                columns: table => new
-                {
-                    userid = table.Column<int>(name: "user_id", type: "integer", nullable: false),
-                    roleid = table.Column<int>(name: "role_id", type: "integer", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_user_roles", x => new { x.userid, x.roleid });
-                    table.ForeignKey(
-                        name: "FK_user_roles_roles_role_id",
-                        column: x => x.roleid,
-                        principalTable: "roles",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_user_roles_users_user_id",
-                        column: x => x.userid,
-                        principalTable: "users",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                });
+            // migrationBuilder.CreateTable(
+            //     name: "user_roles",
+            //     columns: table => new
+            //     {
+            //         userid = table.Column<int>(name: "user_id", type: "integer", nullable: false),
+            //         roleid = table.Column<int>(name: "role_id", type: "integer", nullable: false)
+            //     },
+            //     constraints: table =>
+            //     {
+            //         table.PrimaryKey("PK_user_roles", x => new { x.userid, x.roleid });
+            //         table.ForeignKey(
+            //             name: "FK_user_roles_roles_role_id",
+            //             column: x => x.roleid,
+            //             principalTable: "roles",
+            //             principalColumn: "id",
+            //             onDelete: ReferentialAction.Cascade);
+            //         table.ForeignKey(
+            //             name: "FK_user_roles_users_user_id",
+            //             column: x => x.userid,
+            //             principalTable: "users",
+            //             principalColumn: "id",
+            //             onDelete: ReferentialAction.Cascade);
+            //     });
 
             migrationBuilder.CreateTable(
                 name: "cuotas_comerciales",

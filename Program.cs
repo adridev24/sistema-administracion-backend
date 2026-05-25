@@ -2,37 +2,42 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Infrastructure;
+using System.Net;
 using System.Text;
+using System.Text.Json.Serialization;
 using BudgetControl.Api.Data;
 using BudgetControl.Api.Services;
 using BudgetControl.Api.Services.Commercial;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+});
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// CORS - allow frontend origins on localhost
+// CORS - allow frontend origins on localhost and local network addresses
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: "AllowFrontend",
         policy =>
         {
-            policy.SetIsOriginAllowed(origin =>
-            {
-                var uri = new Uri(origin);
-                return uri.Host == "localhost" || uri.Host == "127.0.0.1";
-            })
-            .AllowAnyHeader()
-            .AllowAnyMethod();
+            policy.AllowAnyOrigin()
+                .AllowAnyHeader()
+                .AllowAnyMethod();
         });
 });
 
 // DbContext (PostgreSQL) - update connection string in appsettings.json
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// External SQL Server DbContext for Clientes/Obras
+builder.Services.AddDbContext<ExternalDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServerConnection")));
 
 // JWT settings
 var jwtSection = builder.Configuration.GetSection("Jwt");
@@ -62,6 +67,7 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IComercialService, ComercialService>();
 builder.Services.AddScoped<IPagoComercialService, PagoComercialService>();
+builder.Services.AddScoped<IExternalDataService, ExternalDataService>();
 
 var app = builder.Build();
 
