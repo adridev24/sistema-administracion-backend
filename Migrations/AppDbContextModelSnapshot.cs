@@ -84,6 +84,72 @@ namespace BudgetControl.Api.Migrations
                     b.ToTable("acuerdos_comerciales", (string)null);
                 });
 
+            modelBuilder.Entity("BudgetControl.Api.Models.Commercial.AjusteCuotaComercial", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AcuerdoComercialId")
+                        .HasColumnType("integer")
+                        .HasColumnName("acuerdo_comercial_id");
+
+                    b.Property<int>("CuotaComercialId")
+                        .HasColumnType("integer")
+                        .HasColumnName("cuota_comercial_id");
+
+                    b.Property<DateTime>("FechaAjuste")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("fecha_ajuste");
+
+                    b.Property<DateTime?>("FechaVencimientoAnterior")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("fecha_vencimiento_anterior");
+
+                    b.Property<DateTime?>("FechaVencimientoNueva")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("fecha_vencimiento_nueva");
+
+                    b.Property<decimal?>("ImporteAnterior")
+                        .HasColumnType("numeric")
+                        .HasColumnName("importe_anterior");
+
+                    b.Property<decimal?>("ImporteNuevo")
+                        .HasColumnType("numeric")
+                        .HasColumnName("importe_nuevo");
+
+                    b.Property<string>("Motivo")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("motivo");
+
+                    b.Property<int>("PlanPagoId")
+                        .HasColumnType("integer")
+                        .HasColumnName("plan_pago_id");
+
+                    b.Property<int>("TipoAjuste")
+                        .HasColumnType("integer")
+                        .HasColumnName("tipo_ajuste");
+
+                    b.Property<string>("UsuarioAjuste")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("usuario_ajuste");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AcuerdoComercialId");
+
+                    b.HasIndex("CuotaComercialId");
+
+                    b.HasIndex("PlanPagoId");
+
+                    b.ToTable("ajustes_cuotas_comerciales", (string)null);
+                });
+
             modelBuilder.Entity("BudgetControl.Api.Models.Commercial.AplicacionPagoComercial", b =>
                 {
                     b.Property<int>("Id")
@@ -439,6 +505,33 @@ namespace BudgetControl.Api.Migrations
                     b.ToTable("user_roles", (string)null);
                 });
 
+            modelBuilder.Entity("BudgetControl.Api.Models.Commercial.AjusteCuotaComercial", b =>
+                {
+                    b.HasOne("BudgetControl.Api.Models.Commercial.AcuerdoComercial", "AcuerdoComercial")
+                        .WithMany()
+                        .HasForeignKey("AcuerdoComercialId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BudgetControl.Api.Models.Commercial.CuotaComercial", "CuotaComercial")
+                        .WithMany("Ajustes")
+                        .HasForeignKey("CuotaComercialId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BudgetControl.Api.Models.Commercial.PlanPago", "PlanPago")
+                        .WithMany()
+                        .HasForeignKey("PlanPagoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AcuerdoComercial");
+
+                    b.Navigation("CuotaComercial");
+
+                    b.Navigation("PlanPago");
+                });
+
             modelBuilder.Entity("BudgetControl.Api.Models.Commercial.AplicacionPagoComercial", b =>
                 {
                     b.HasOne("BudgetControl.Api.Models.Commercial.CuotaComercial", "CuotaComercial")
@@ -530,6 +623,8 @@ namespace BudgetControl.Api.Migrations
 
             modelBuilder.Entity("BudgetControl.Api.Models.Commercial.CuotaComercial", b =>
                 {
+                    b.Navigation("Ajustes");
+
                     b.Navigation("Aplicaciones");
 
                     b.Navigation("VinculacionesFactura");

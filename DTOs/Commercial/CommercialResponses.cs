@@ -50,6 +50,22 @@ namespace BudgetControl.Api.DTOs.Commercial
         public CuotaEstado Estado { get; set; }
     }
 
+    public class AjusteCuotaResponse
+    {
+        public int Id { get; set; }
+        public int CuotaComercialId { get; set; }
+        public int PlanPagoId { get; set; }
+        public int AcuerdoComercialId { get; set; }
+        public TipoAjuste TipoAjuste { get; set; }
+        public decimal? ImporteAnterior { get; set; }
+        public decimal? ImporteNuevo { get; set; }
+        public DateTime? FechaVencimientoAnterior { get; set; }
+        public DateTime? FechaVencimientoNueva { get; set; }
+        public string Motivo { get; set; } = null!;
+        public DateTime FechaAjuste { get; set; }
+        public string UsuarioAjuste { get; set; } = null!;
+    }
+
     public class PagoComercialResponse
     {
         public int Id { get; set; }
@@ -87,5 +103,42 @@ namespace BudgetControl.Api.DTOs.Commercial
         public decimal TotalPrometido { get; set; }
         public decimal TotalPagado { get; set; }
         public decimal SaldoRestante { get; set; }
+    }
+
+    public class ReporteComercialResumenResponse
+    {
+        public DateTime PeriodoDesde { get; set; }
+        public DateTime PeriodoHasta { get; set; }
+        public decimal TotalAcordadoActivo { get; set; }
+        public decimal TotalCobradoPeriodo { get; set; }
+        public decimal TotalPorCobrarPeriodo { get; set; }
+        public decimal TotalVencido { get; set; }
+        public decimal SaldoTotalClientes { get; set; }
+        public int AcuerdosActivos { get; set; }
+        public int CuotasPendientesPeriodo { get; set; }
+        public int CuotasVencidas { get; set; }
+        public List<ClienteDeudaReporteResponse> ClientesConDeuda { get; set; } = new();
+        public List<CuotaReporteResponse> ProximosVencimientos { get; set; } = new();
+    }
+
+    public class ClienteDeudaReporteResponse
+    {
+        public string ClienteExternoId { get; set; } = null!;
+        public decimal TotalAcordado { get; set; }
+        public decimal TotalPagado { get; set; }
+        public decimal SaldoPendiente { get; set; }
+        public int AcuerdosActivos { get; set; }
+    }
+
+    public class CuotaReporteResponse
+    {
+        public int CuotaId { get; set; }
+        public int AcuerdoComercialId { get; set; }
+        public string NumeroAcuerdo { get; set; } = null!;
+        public string ClienteExternoId { get; set; } = null!;
+        public string ObraExternaId { get; set; } = null!;
+        public DateTime FechaVencimiento { get; set; }
+        public decimal SaldoPendiente { get; set; }
+        public CuotaEstado Estado { get; set; }
     }
 }

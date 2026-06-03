@@ -49,6 +49,42 @@ namespace BudgetControl.Api.DTOs.Commercial
         public string? Observaciones { get; set; }
     }
 
+    public class UpdatePlanPagoRequest
+    {
+        [Required]
+        public bool TieneAnticipo { get; set; }
+
+        [Range(0, double.MaxValue)]
+        public decimal MontoAnticipo { get; set; }
+
+        [Range(1, int.MaxValue)]
+        public int CantidadCuotas { get; set; }
+
+        [Required]
+        public DateTime FechaPrimerVencimiento { get; set; }
+
+        [Required]
+        public string Periodicidad { get; set; } = null!;
+
+        public string? Observaciones { get; set; }
+
+        [Required]
+        public List<UpdateCuotaRequest> Cuotas { get; set; } = new List<UpdateCuotaRequest>();
+    }
+
+    public class UpdateCuotaRequest
+    {
+        [Required]
+        public int Id { get; set; }
+
+        [Required]
+        public DateTime FechaVencimiento { get; set; }
+
+        [Required]
+        [Range(0.01, double.MaxValue)]
+        public decimal ImporteOriginal { get; set; }
+    }
+
     public class CreatePagoComercialRequest
     {
         [Required]
@@ -81,6 +117,39 @@ namespace BudgetControl.Api.DTOs.Commercial
         [Required]
         [Range(0.01, double.MaxValue)]
         public decimal ImporteAplicado { get; set; }
+    }
+
+    public class AjusteCuotaRequest
+    {
+        [Range(0.01, double.MaxValue)]
+        public decimal? NuevoImporteOriginal { get; set; }
+
+        public DateTime? NuevaFechaVencimiento { get; set; }
+
+        [Required]
+        public string Motivo { get; set; } = null!;
+
+        [Required]
+        public string Usuario { get; set; } = null!;
+    }
+
+    public class AddCuotaAjusteRequest
+    {
+        [Required]
+        [Range(0.01, double.MaxValue)]
+        public decimal ImporteOriginal { get; set; }
+
+        [Required]
+        public DateTime FechaVencimiento { get; set; }
+
+        [Required]
+        public TipoCuota TipoCuota { get; set; }
+
+        [Required]
+        public string Motivo { get; set; } = null!;
+
+        [Required]
+        public string Usuario { get; set; } = null!;
     }
 
     public class AplicarPagoRequest

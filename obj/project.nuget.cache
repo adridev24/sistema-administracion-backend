@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "tnmdQITNKRs=",
+  "dgSpecHash": "CXw3YkLoClU=",
   "success": true,
-  "projectFilePath": "C:\\Users\\user\\Documents\\Sistemas\\SistemaAdministracion\\backend\\BudgetControl.Api.csproj",
+  "projectFilePath": "C:\\Users\\user\\Documents\\SistemaAdministracionAlbace\\backend\\BudgetControl.Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\user\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
@@ -54,9 +54,9 @@
       "code": "NU1903",
       "level": "Warning",
       "message": "El paquete \"Azure.Identity\" 1.6.0 tiene una vulnerabilidad de gravedad alta conocida, https://github.com/advisories/GHSA-5mfx-4wcx-rv27",
-      "projectPath": "C:\\Users\\user\\Documents\\Sistemas\\SistemaAdministracion\\backend\\BudgetControl.Api.csproj",
+      "projectPath": "C:\\Users\\user\\Documents\\SistemaAdministracionAlbace\\backend\\BudgetControl.Api.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\Users\\user\\Documents\\Sistemas\\SistemaAdministracion\\backend\\BudgetControl.Api.csproj",
+      "filePath": "C:\\Users\\user\\Documents\\SistemaAdministracionAlbace\\backend\\BudgetControl.Api.csproj",
       "libraryId": "Azure.Identity",
       "targetGraphs": [
         "net10.0"
@@ -66,9 +66,9 @@
       "code": "NU1902",
       "level": "Warning",
       "message": "El paquete \"Azure.Identity\" 1.6.0 tiene una vulnerabilidad de gravedad moderada conocida, https://github.com/advisories/GHSA-m5vv-6r4h-3vj9",
-      "projectPath": "C:\\Users\\user\\Documents\\Sistemas\\SistemaAdministracion\\backend\\BudgetControl.Api.csproj",
+      "projectPath": "C:\\Users\\user\\Documents\\SistemaAdministracionAlbace\\backend\\BudgetControl.Api.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\Users\\user\\Documents\\Sistemas\\SistemaAdministracion\\backend\\BudgetControl.Api.csproj",
+      "filePath": "C:\\Users\\user\\Documents\\SistemaAdministracionAlbace\\backend\\BudgetControl.Api.csproj",
       "libraryId": "Azure.Identity",
       "targetGraphs": [
         "net10.0"
@@ -78,9 +78,9 @@
       "code": "NU1902",
       "level": "Warning",
       "message": "El paquete \"Azure.Identity\" 1.6.0 tiene una vulnerabilidad de gravedad moderada conocida, https://github.com/advisories/GHSA-wvxc-855f-jvrv",
-      "projectPath": "C:\\Users\\user\\Documents\\Sistemas\\SistemaAdministracion\\backend\\BudgetControl.Api.csproj",
+      "projectPath": "C:\\Users\\user\\Documents\\SistemaAdministracionAlbace\\backend\\BudgetControl.Api.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\Users\\user\\Documents\\Sistemas\\SistemaAdministracion\\backend\\BudgetControl.Api.csproj",
+      "filePath": "C:\\Users\\user\\Documents\\SistemaAdministracionAlbace\\backend\\BudgetControl.Api.csproj",
       "libraryId": "Azure.Identity",
       "targetGraphs": [
         "net10.0"
@@ -90,9 +90,9 @@
       "code": "NU1903",
       "level": "Warning",
       "message": "El paquete \"Microsoft.Data.SqlClient\" 5.0.1 tiene una vulnerabilidad de gravedad alta conocida, https://github.com/advisories/GHSA-98g6-xh36-x2p7",
-      "projectPath": "C:\\Users\\user\\Documents\\Sistemas\\SistemaAdministracion\\backend\\BudgetControl.Api.csproj",
+      "projectPath": "C:\\Users\\user\\Documents\\SistemaAdministracionAlbace\\backend\\BudgetControl.Api.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\Users\\user\\Documents\\Sistemas\\SistemaAdministracion\\backend\\BudgetControl.Api.csproj",
+      "filePath": "C:\\Users\\user\\Documents\\SistemaAdministracionAlbace\\backend\\BudgetControl.Api.csproj",
       "libraryId": "Microsoft.Data.SqlClient",
       "targetGraphs": [
         "net10.0"
@@ -102,9 +102,9 @@
       "code": "NU1902",
       "level": "Warning",
       "message": "El paquete \"Microsoft.IdentityModel.JsonWebTokens\" 6.21.0 tiene una vulnerabilidad de gravedad moderada conocida, https://github.com/advisories/GHSA-59j7-ghrg-fj52",
-      "projectPath": "C:\\Users\\user\\Documents\\Sistemas\\SistemaAdministracion\\backend\\BudgetControl.Api.csproj",
+      "projectPath": "C:\\Users\\user\\Documents\\SistemaAdministracionAlbace\\backend\\BudgetControl.Api.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\Users\\user\\Documents\\Sistemas\\SistemaAdministracion\\backend\\BudgetControl.Api.csproj",
+      "filePath": "C:\\Users\\user\\Documents\\SistemaAdministracionAlbace\\backend\\BudgetControl.Api.csproj",
       "libraryId": "Microsoft.IdentityModel.JsonWebTokens",
       "targetGraphs": [
         "net10.0"
@@ -114,9 +114,9 @@
       "code": "NU1903",
       "level": "Warning",
       "message": "El paquete \"Npgsql\" 7.0.0 tiene una vulnerabilidad de gravedad alta conocida, https://github.com/advisories/GHSA-x9vc-6hfv-hg8c",
-      "projectPath": "C:\\Users\\user\\Documents\\Sistemas\\SistemaAdministracion\\backend\\BudgetControl.Api.csproj",
+      "projectPath": "C:\\Users\\user\\Documents\\SistemaAdministracionAlbace\\backend\\BudgetControl.Api.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\Users\\user\\Documents\\Sistemas\\SistemaAdministracion\\backend\\BudgetControl.Api.csproj",
+      "filePath": "C:\\Users\\user\\Documents\\SistemaAdministracionAlbace\\backend\\BudgetControl.Api.csproj",
       "libraryId": "Npgsql",
       "targetGraphs": [
         "net10.0"
@@ -126,9 +126,9 @@
       "code": "NU1904",
       "level": "Warning",
       "message": "El paquete \"System.Drawing.Common\" 5.0.0 tiene una vulnerabilidad de gravedad crítica conocida, https://github.com/advisories/GHSA-rxg9-xrhp-64gj",
-      "projectPath": "C:\\Users\\user\\Documents\\Sistemas\\SistemaAdministracion\\backend\\BudgetControl.Api.csproj",
+      "projectPath": "C:\\Users\\user\\Documents\\SistemaAdministracionAlbace\\backend\\BudgetControl.Api.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\Users\\user\\Documents\\Sistemas\\SistemaAdministracion\\backend\\BudgetControl.Api.csproj",
+      "filePath": "C:\\Users\\user\\Documents\\SistemaAdministracionAlbace\\backend\\BudgetControl.Api.csproj",
       "libraryId": "System.Drawing.Common",
       "targetGraphs": [
         "net10.0"
@@ -138,9 +138,9 @@
       "code": "NU1902",
       "level": "Warning",
       "message": "El paquete \"System.IdentityModel.Tokens.Jwt\" 6.21.0 tiene una vulnerabilidad de gravedad moderada conocida, https://github.com/advisories/GHSA-59j7-ghrg-fj52",
-      "projectPath": "C:\\Users\\user\\Documents\\Sistemas\\SistemaAdministracion\\backend\\BudgetControl.Api.csproj",
+      "projectPath": "C:\\Users\\user\\Documents\\SistemaAdministracionAlbace\\backend\\BudgetControl.Api.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\Users\\user\\Documents\\Sistemas\\SistemaAdministracion\\backend\\BudgetControl.Api.csproj",
+      "filePath": "C:\\Users\\user\\Documents\\SistemaAdministracionAlbace\\backend\\BudgetControl.Api.csproj",
       "libraryId": "System.IdentityModel.Tokens.Jwt",
       "targetGraphs": [
         "net10.0"

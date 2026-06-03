@@ -17,5 +17,6 @@ namespace BudgetControl.Api.Models.Commercial
         public PlanPago PlanPago { get; set; } = null!;
         public ICollection<AplicacionPagoComercial> Aplicaciones { get; set; } = new List<AplicacionPagoComercial>();
         public ICollection<VinculacionFacturaComercial> VinculacionesFactura { get; set; } = new List<VinculacionFacturaComercial>();
+        public ICollection<AjusteCuotaComercial> Ajustes { get; set; } = new List<AjusteCuotaComercial>();
     }
 }

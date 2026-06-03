@@ -32,6 +32,11 @@ POST /api/acuerdos/{id}/plan-pago
 }
 ```
 
+## Aprobar acuerdo comercial
+POST /api/acuerdos/{id}/aprobar
+
+No se requiere cuerpo de la petición.
+
 ## Registrar pago comercial
 POST /api/pagos-comerciales
 

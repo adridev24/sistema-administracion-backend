@@ -20,6 +20,7 @@ namespace BudgetControl.Api.Data
         public DbSet<PagoComercial> PagosComerciales { get; set; } = null!;
         public DbSet<AplicacionPagoComercial> AplicacionesPagoComerciales { get; set; } = null!;
         public DbSet<VinculacionFacturaComercial> VinculacionesFacturaComerciales { get; set; } = null!;
+        public DbSet<AjusteCuotaComercial> AjustesCuotaComerciales { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -183,6 +184,38 @@ namespace BudgetControl.Api.Data
                 entity.HasOne(e => e.CuotaComercial)
                     .WithMany(c => c.VinculacionesFactura)
                     .HasForeignKey(e => e.CuotaComercialId)
+                    .OnDelete(DeleteBehavior.Cascade);
+            });
+
+            modelBuilder.Entity<AjusteCuotaComercial>(entity =>
+            {
+                entity.ToTable("ajustes_cuotas_comerciales");
+                entity.Property(e => e.Id).HasColumnName("id");
+                entity.Property(e => e.CuotaComercialId).HasColumnName("cuota_comercial_id");
+                entity.Property(e => e.PlanPagoId).HasColumnName("plan_pago_id");
+                entity.Property(e => e.AcuerdoComercialId).HasColumnName("acuerdo_comercial_id");
+                entity.Property(e => e.TipoAjuste).HasColumnName("tipo_ajuste");
+                entity.Property(e => e.ImporteAnterior).HasColumnName("importe_anterior");
+                entity.Property(e => e.ImporteNuevo).HasColumnName("importe_nuevo");
+                entity.Property(e => e.FechaVencimientoAnterior).HasColumnName("fecha_vencimiento_anterior");
+                entity.Property(e => e.FechaVencimientoNueva).HasColumnName("fecha_vencimiento_nueva");
+                entity.Property(e => e.Motivo).HasColumnName("motivo");
+                entity.Property(e => e.FechaAjuste).HasColumnName("fecha_ajuste");
+                entity.Property(e => e.UsuarioAjuste).HasColumnName("usuario_ajuste");
+
+                entity.HasOne(e => e.CuotaComercial)
+                    .WithMany(c => c.Ajustes)
+                    .HasForeignKey(e => e.CuotaComercialId)
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(e => e.PlanPago)
+                    .WithMany()
+                    .HasForeignKey(e => e.PlanPagoId)
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(e => e.AcuerdoComercial)
+                    .WithMany()
+                    .HasForeignKey(e => e.AcuerdoComercialId)
                     .OnDelete(DeleteBehavior.Cascade);
             });
         }

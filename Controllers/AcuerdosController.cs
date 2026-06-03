@@ -66,6 +66,34 @@ namespace BudgetControl.Api.Controllers
             }
         }
 
+        [HttpPut("{id}/plan-pago")]
+        public async Task<IActionResult> UpdatePlanPago(int id, [FromBody] UpdatePlanPagoRequest request)
+        {
+            try
+            {
+                var resultado = await _service.ActualizarPlanPagoAsync(id, request);
+                return Ok(resultado);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(new { error = ex.Message });
+            }
+        }
+
+        [HttpPost("{id}/aprobar")]
+        public async Task<IActionResult> Approve(int id)
+        {
+            try
+            {
+                var resultado = await _service.AprobarAcuerdoAsync(id);
+                return Ok(resultado);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(new { error = ex.Message });
+            }
+        }
+
         [HttpGet("{id}/estado-comercial")]
         public async Task<IActionResult> GetEstadoComercial(int id)
         {

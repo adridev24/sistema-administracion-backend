@@ -33,6 +33,15 @@ namespace BudgetControl.Api.Models.Commercial
         Anulada
     }
 
+    public enum TipoAjuste
+    {
+        CambioImporte,
+        CambioVencimiento,
+        CambioImporteYVencimiento,
+        NuevaCuota,
+        AnulacionCuota
+    }
+
     public enum PagoEstado
     {
         Registrado,
