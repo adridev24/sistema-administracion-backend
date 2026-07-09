@@ -15,6 +15,12 @@ namespace BudgetControl.Api.Models.Commercial
         Via2
     }
 
+    public enum ModalidadCobro
+    {
+        Planificada,
+        Abierta
+    }
+
     public enum TipoCuota
     {
         Anticipo,
@@ -42,10 +48,42 @@ namespace BudgetControl.Api.Models.Commercial
         AnulacionCuota
     }
 
+    public enum TipoAjusteVia
+    {
+        CambioMonto,
+        RefinanciacionAutomatica,
+        CambioMoneda,
+        AnulacionVia,
+        ReactivacionVia
+    }
+
     public enum PagoEstado
     {
         Registrado,
         Aplicado,
+        Anulado
+    }
+
+    public enum OrigenPago
+    {
+        Comercial,
+        Ventas
+    }
+
+    public enum TipoImputacion
+    {
+        Anticipo,
+        PagoParcial,
+        Hito,
+        SaldoGeneral,
+        Cuota
+    }
+
+    public enum HitoEstado
+    {
+        Pendiente,
+        Parcial,
+        Cumplido,
         Anulado
     }
 }

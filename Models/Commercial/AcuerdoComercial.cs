@@ -24,7 +24,7 @@ namespace BudgetControl.Api.Models.Commercial
         public DateTime FechaAlta { get; set; }
         public string UsuarioAlta { get; set; } = null!;
 
-        public PlanPago? PlanPago { get; set; }
+        public ICollection<AcuerdoComercialVia> Vias { get; set; } = new List<AcuerdoComercialVia>();
         public ICollection<PagoComercial> Pagos { get; set; } = new List<PagoComercial>();
     }
 }

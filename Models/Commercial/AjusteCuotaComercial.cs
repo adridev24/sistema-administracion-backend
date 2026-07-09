@@ -7,6 +7,7 @@ namespace BudgetControl.Api.Models.Commercial
         public int Id { get; set; }
         public int CuotaComercialId { get; set; }
         public int PlanPagoId { get; set; }
+        public int AcuerdoComercialViaId { get; set; }
         public int AcuerdoComercialId { get; set; }
         public TipoAjuste TipoAjuste { get; set; }
         public decimal? ImporteAnterior { get; set; }
@@ -21,6 +22,7 @@ namespace BudgetControl.Api.Models.Commercial
 
         public CuotaComercial CuotaComercial { get; set; } = null!;
         public PlanPago PlanPago { get; set; } = null!;
+        public AcuerdoComercialVia AcuerdoComercialVia { get; set; } = null!;
         public AcuerdoComercial AcuerdoComercial { get; set; } = null!;
     }
 }

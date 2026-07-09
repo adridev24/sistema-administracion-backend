@@ -1,10 +1,12 @@
 using BudgetControl.Api.DTOs.Commercial;
 using BudgetControl.Api.Services.Commercial;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BudgetControl.Api.Controllers
 {
     [ApiController]
+    [Authorize]
     [Route("api/comercial")]
     public class ComercialAjustesController : ControllerBase
     {
@@ -53,6 +55,12 @@ namespace BudgetControl.Api.Controllers
         public async Task<IActionResult> GetHistorialAcuerdo(int acuerdoId)
         {
             return Ok(await _service.GetHistorialAjustesPorAcuerdoAsync(acuerdoId));
+        }
+
+        [HttpGet("acuerdos-vias/{acuerdoViaId}/historial-ajustes")]
+        public async Task<IActionResult> GetHistorialVia(int acuerdoViaId)
+        {
+            return Ok(await _service.GetHistorialAjustesPorViaAsync(acuerdoViaId));
         }
     }
 }

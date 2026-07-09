@@ -75,6 +75,8 @@ builder.Services.AddAuthentication(options =>
     });
 
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<IUserContext, CurrentUserService>();
 builder.Services.AddScoped<IComercialService, ComercialService>();
 builder.Services.AddScoped<IPagoComercialService, PagoComercialService>();
 builder.Services.AddScoped<IExternalDataService, ExternalDataService>();

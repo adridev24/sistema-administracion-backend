@@ -1,10 +1,12 @@
 using BudgetControl.Api.DTOs.Commercial;
 using BudgetControl.Api.Services.Commercial;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BudgetControl.Api.Controllers
 {
     [ApiController]
+    [Authorize]
     [Route("api/pagos-comerciales")]
     public class PagosComercialesController : ControllerBase
     {
@@ -20,6 +22,21 @@ namespace BudgetControl.Api.Controllers
         {
             try
             {
+                var resultado = await _service.RegistrarPagoAsync(request);
+                return CreatedAtAction(nameof(GetById), new { id = resultado.Id }, resultado);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(new { error = ex.Message });
+            }
+        }
+
+        [HttpPost("/api/comercial/acuerdos-vias/{id}/pagos")]
+        public async Task<IActionResult> RegisterByVia(int id, [FromBody] CreatePagoComercialRequest request)
+        {
+            try
+            {
+                request.AcuerdoComercialViaId = id;
                 var resultado = await _service.RegistrarPagoAsync(request);
                 return CreatedAtAction(nameof(GetById), new { id = resultado.Id }, resultado);
             }

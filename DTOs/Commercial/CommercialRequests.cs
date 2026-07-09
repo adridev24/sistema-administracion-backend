@@ -14,20 +14,47 @@ namespace BudgetControl.Api.DTOs.Commercial
         [Required]
         public string NumeroAcuerdo { get; set; } = null!;
 
-        [Required]
-        [Range(0.01, double.MaxValue)]
-        public decimal MontoTotal { get; set; }
+        public decimal? MontoTotal { get; set; }
 
         [Required]
         public DateTime FechaAcuerdo { get; set; }
 
         public string? Descripcion { get; set; }
-        public AcuerdoEstado Estado { get; set; }
-        public ViaOperacion ViaOperacion { get; set; }
+        public AcuerdoEstado Estado { get; set; } = AcuerdoEstado.Borrador;
+        public ViaOperacion? ViaOperacion { get; set; }
         public string? Observaciones { get; set; }
 
+        public List<CreateAcuerdoViaRequest> Vias { get; set; } = new();
+    }
+
+    public class CreateAcuerdoViaRequest
+    {
         [Required]
-        public string UsuarioAlta { get; set; } = null!;
+        public ViaOperacion ViaOperacion { get; set; }
+
+        public ModalidadCobro? ModalidadCobro { get; set; }
+
+        [Required]
+        public string MonedaCodigo { get; set; } = "ARS";
+
+        [Range(0.01, double.MaxValue)]
+        public decimal MontoOriginal { get; set; }
+
+        public decimal? MontoActual { get; set; }
+        public AcuerdoEstado Estado { get; set; } = AcuerdoEstado.Borrador;
+        public string? Observaciones { get; set; }
+    }
+
+    public class ModificarMontoViaRequest
+    {
+        [Range(0.01, double.MaxValue)]
+        public decimal NuevoMonto { get; set; }
+
+        public bool RefinanciarCuotasPendientes { get; set; }
+
+        [Required]
+        public string Motivo { get; set; } = null!;
+
     }
 
     public class CreatePlanPagoRequest
@@ -69,7 +96,7 @@ namespace BudgetControl.Api.DTOs.Commercial
         public string? Observaciones { get; set; }
 
         [Required]
-        public List<UpdateCuotaRequest> Cuotas { get; set; } = new List<UpdateCuotaRequest>();
+        public List<UpdateCuotaRequest> Cuotas { get; set; } = new();
     }
 
     public class UpdateCuotaRequest
@@ -97,6 +124,12 @@ namespace BudgetControl.Api.DTOs.Commercial
         public int AcuerdoComercialId { get; set; }
 
         [Required]
+        public int AcuerdoComercialViaId { get; set; }
+
+        [Required]
+        public string MonedaCodigo { get; set; } = "ARS";
+
+        [Required]
         public DateTime FechaPago { get; set; }
 
         [Required]
@@ -105,18 +138,22 @@ namespace BudgetControl.Api.DTOs.Commercial
 
         [Required]
         public string MedioPago { get; set; } = null!;
+        public TipoImputacion TipoImputacion { get; set; } = TipoImputacion.SaldoGeneral;
         public string? Observaciones { get; set; }
-        public List<AplicacionPagoRequest> Aplicaciones { get; set; } = new List<AplicacionPagoRequest>();
+        public List<AplicacionPagoRequest> Aplicaciones { get; set; } = new();
     }
 
     public class AplicacionPagoRequest
     {
-        [Required]
-        public int CuotaComercialId { get; set; }
+        public int? CuotaComercialId { get; set; }
+        public int? HitoComercialViaId { get; set; }
 
         [Required]
         [Range(0.01, double.MaxValue)]
         public decimal ImporteAplicado { get; set; }
+
+        public TipoImputacion TipoImputacion { get; set; } = TipoImputacion.Cuota;
+        public string? Observaciones { get; set; }
     }
 
     public class AjusteCuotaRequest
@@ -129,8 +166,6 @@ namespace BudgetControl.Api.DTOs.Commercial
         [Required]
         public string Motivo { get; set; } = null!;
 
-        [Required]
-        public string Usuario { get; set; } = null!;
     }
 
     public class AddCuotaAjusteRequest
@@ -148,13 +183,25 @@ namespace BudgetControl.Api.DTOs.Commercial
         [Required]
         public string Motivo { get; set; } = null!;
 
-        [Required]
-        public string Usuario { get; set; } = null!;
     }
 
     public class AplicarPagoRequest
     {
         [Required]
-        public List<AplicacionPagoRequest> Aplicaciones { get; set; } = new List<AplicacionPagoRequest>();
+        public List<AplicacionPagoRequest> Aplicaciones { get; set; } = new();
+    }
+
+    public class CreateHitoComercialRequest
+    {
+        [Required]
+        public string Descripcion { get; set; } = null!;
+
+        [Range(0, double.MaxValue)]
+        public decimal ImporteEstimado { get; set; }
+
+        [Required]
+        public DateTime FechaReferencia { get; set; }
+
+        public string? Observaciones { get; set; }
     }
 }
